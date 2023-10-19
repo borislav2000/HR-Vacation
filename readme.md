@@ -88,6 +88,3 @@ The application uses a PostgreSQL dbms for data storage/management:
 
 SmallWebApp, Cloud, CXP, Helpers, Bootstrap, PostgreSQL
 
-### Author:
-
-Alaska Software
