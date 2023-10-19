@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<version number="1.0" />
+<session>
+  <active file=".\unit-test\testbankholidaycontroller.prg" target=".\smallwebapp.web" />
+  <openfiles>
+    <openfile path=".\views\employeerequest.cxp" column="30" line="18" />
+    <openfile path=".\helpers\holiday_controller.prg" column="126" line="17" />
+    <openfile path=".\helpers\employee_holiday.prg" column="54" line="107" />
+    <openfile path=".\helpers\documents_controller.prg" column="34" line="86" />
+    <openfile path=".\helpers\bank_holiday_controller.prg" column="127" line="146" />
+    <openfile path=".\helpers\user_account.prg" column="0" line="0" />
+    <openfile path=".\helpers\user_service.prg" column="0" line="0" />
+    <openfile path=".\helpers\employee.prg" column="29" line="61" />
+    <openfile path=".\helpers\employee_service.prg" column="0" line="0" />
+    <openfile path=".\helpers\manager_service.prg" column="0" line="0" />
+    <openfile path=".\helpers\vacation.prg" column="0" line="0" />
+    <openfile path=".\unit-test\testholidaycontroller.prg" column="36" line="222" />
+    <openfile path=".\views\index.cxp" column="32" line="25" />
+    <openfile path=".\assets\css\login.css" column="0" line="0" />
+    <openfile path=".\employee-request-logic.cxp" column="88" line="25" />
+    <openfile path=".\views\changepasswordview.cxp" column="9" line="8" />
+    <openfile path=".\helpers\user_controller.prg" column="52" line="70" />
+    <openfile path=".\helpers\email_sender.prg" column="40" line="52" />
+    <openfile path=".\application.config" column="33" line="21" />
+    <openfile path=".\helpers\employee_controller.prg" column="133" line="201" />
+    <openfile path=".\helpers\main_page_controller.prg" column="139" line="21" />
+    <openfile path=".\views\managermainview.cxp" column="0" line="0" />
+    <openfile path=".\views\manageemployees.cxp" column="0" line="0" />
+    <openfile path=".\unit-test\mygroup.prg" column="0" line="0" />
+    <openfile path=".\unit-test\testbankholidaycontroller.prg" column="81" line="143" />
+    <openfile path=".\helpers\connection.prg" column="0" line="15" />
+    <openfile path=".\unit-test\test-loader.prg" column="0" line="0" />
+    <openfile path=".\unit-test\testusercontroller.prg" column="51" line="135" />
+    <openfile path=".\unit-test\testemployeecontroller.prg" column="121" line="222" />
+    <openfile path=".\views\employeemainview.cxp" column="0" line="0" />
+    <openfile path=".\views\holidayRequestsMain.cxp" column="0" line="0" />
+    <openfile path=".\views\employeeEditFields.cxp" column="0" line="0" />
+    <openfile path=".\views\loginformview.cxp" column="0" line="0" />
+    <openfile path=".\views\preferences.cxp" column="0" line="0" />
+    <openfile path=".\views\bankHolidaysAdd.cxp" column="30" line="29" />
+    <openfile path=".\views\holidaycalendar.cxp" column="0" line="0" />
+    <openfile path=".\views\employeeAdd.cxp" column="0" line="0" />
+    <openfile path=".\views\about.cxp" column="56" line="11" />
+    <openfile path=".\views\site.layout" column="50" line="105" />
+    <openfile path=".\index.cxp" column="41" line="15" />
+    <openfile path=".\helpers\bank_holiday.prg" column="0" line="0" />
+  </openfiles>
+  <view>
+    <expanded key="_DD935D27408B003EDFF2C36D13B98FCBAF9592D8" />
+    <expanded key="_CCA623CCF5B2BF1E9C809AB890A3C3534EA4661C" />
+    <expanded key="_8C6DB87559860ED88547E57A5F30369CF952DB59" />
+    <expanded key="_33D079B1ACDA16D52A0674C1E4062F2B439DCC1C" />
+  </view>
+</session>

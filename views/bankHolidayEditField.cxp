@@ -1,0 +1,36 @@
+<%
+   ::Session:configPath := SELF:PhysicalPath + "..\application.config"
+   ConnectionManager():startup( ::Session:configPath )
+   oBankHoliday      := BankHolidayModel():findBy("bank_holiday_id", PValue(1))
+   dBankHolidayDate  := DtoC(oBankHoliday:bank_holiday_date, "yyyy-mm-dd")
+   cReason           := oBankHoliday:reason
+%>
+
+<form id="dateId"></form>
+<table>
+   <tr>
+      <td>
+
+            <input name="date" type="date" value="@(dBankHolidayDate)" form="dateId" />
+            <input name="nId"  type="hidden" value="@(PValue(1))" form="dateId" >
+      </td>
+      <td>
+            <input name="reason" type="text" value="@(cReason)" form="dateId" />
+
+      </td>
+      <td>
+         <button type="button"
+         class="btn btn-outline-dark btn-sm"
+         data-action="/BankHolidayController/update"
+         data-target="bankHolidayTable"
+         data-fragment="bankHolidayTable"
+         data-parameter="form:dateId">Save</button>
+
+         <button type="button"
+         class="btn btn-outline-dark btn-sm"
+         data-action="/MainPageController/bankHolidays"
+         data-target="bankHolidayTable"
+         data-fragment="bankHolidayTable">Cancel</button>
+      </td>
+   </tr>
+</table>

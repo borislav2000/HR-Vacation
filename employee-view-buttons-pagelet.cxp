@@ -1,0 +1,23 @@
+<%#Page trace="yes"%>
+
+
+<div class="nav-btns mt-4">
+   <button class="btn btn-outline-primary"
+             data-action="/MainPageController/myHolidays"
+             data-target="table"
+             >
+             My Holidays
+   </button>
+
+   <button type="button" class="btn btn-outline-primary"
+             data-action="/MainPageController/requestHoliday"
+             data-target="table"
+             >
+             Request Holiday
+   </button>
+
+</button>
+
+</div>
+
+

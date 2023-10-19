@@ -1,0 +1,55 @@
+<%
+  ::Session:configPath := SELF:PhysicalPath + "..\application.config"
+   ConnectionManager():startup( ::Session:configPath )
+   aBankHolidays := BankHolidayModel():allBy('bank_holiday_id')
+
+%>
+
+
+         <h3 class="display-3 mt-3">Bank Holidays</h3>
+
+         <table class="table table-hover table-striped table-bordered mt-3 w-100" id="bankHolidayTable" >
+            <thead>
+               <tr>
+                  <th>Date</th>
+                  <th>Reason</th>
+                  <th>Edit</th>
+               </tr>
+            </thead>
+            <tbody>
+               @ FOR n:= 1 TO Len( aBankHolidays )
+               <tr id="bank_@(aBankHolidays[n]:bank_holiday_id)">
+                  <td>@(Transform(aBankHolidays[n]:bank_holiday_date, "@D"))</td>
+                  <td>@(aBankHolidays[n]:reason)</td>
+                  <td>
+                     <button type="button"
+                        class="btn btn-outline-dark btn-sm"
+                        data-action="/BankHolidayController/edit"
+                        data-target="bank_@(aBankHolidays[n]:bank_holiday_id)"
+                        data-parameter="fields:id='@(AllTrim(Str(aBankHolidays[n]:bank_holiday_id)))'"
+                        >Edit</button>
+
+                     <button type="button"
+                        class="btn btn-outline-dark btn-sm ml-2"
+                        data-confirm='Do you want to delete the date @(Transform(aBankHolidays[n]:bank_holiday_date, "@D"))?'
+                        data-action="/BankHolidayController/delete"
+                        data-parameter="fields:id='@(AllTrim(Str(aBankHolidays[n]:bank_holiday_id)))'"
+
+                        data-target="bankHolidayTable"
+                        data-fragment="bankHolidayTable"
+                        >Delete</button>
+                  </td>
+               </tr>
+               @NEXT
+            </tbody>
+         </table>
+
+
+
+      <button type="button"
+         class="btn btn-info btn-sm mb-3"
+         data-action="/BankHolidayController/add"
+         data-target="target"
+         >Add New Date</button>
+
+

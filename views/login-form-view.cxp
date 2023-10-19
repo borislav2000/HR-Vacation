@@ -1,0 +1,38 @@
+<%#page layout="\site.layout" %>
+<%
+
+ ::Session:configPath := SELF:PhysicalPath + "..\application.config"
+ ConnectionManager():startup(::Session:configPath)
+ 
+ cError := ""
+ IF Empty(::session:errorMessage)
+   // remind referer use to navigate to after successfull log in
+   ::session:referer := ::HttpRequest:GetVariable("HTTP_REFERER")
+ ELSE
+   // we have an error message so lets take it
+   cError := ::session:errorMessage
+   ::session:errorMessage := NIL
+ ENDIF
+%>
+
+<form class="form-signin" id="signin" method="post">
+  <span class="fa fa-user-circle fa-5x m-5" ></span>
+  <h5 class="h3 mb-3 font-weight-normal">Please enter your credentials</h5>
+<!-- display error message if given -->
+@IF !Empty(cError)
+  <div class="text-danger">@(cError)</div>
+@ENDIF
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" value="remember-me"> Remember me
+    </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block"
+   type="button" data-action="UserController/login"
+   data-parameter="form:signin">Sign in</button>
+</form>
+

@@ -1,0 +1,35 @@
+<%#page layout="./site.layout" %>
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">HR Vacation!</h1>
+          <p>The app which helps your company organize employee vacations.</p>
+          <p><a class="btn btn-primary btn-lg" href="https://www.w3schools.com/bootstrap4/bootstrap_jumbotron.asp" role="button">Learn more &raquo;</a></p>
+        </div>
+      </div>
+
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-md-4">
+            <h2>Balace</h2>
+            <p>The HR Vacation offers you a way to track all your holiday days.</p>
+            <p><a class="btn btn-secondary" href="http://awi.alaska-software.net:8090/ex/latest/knowledgebase/outdated-document-xbase++-technology-guidance-for-web-mobile-development-v2" role="button">Learn more &raquo;</a></p>
+          </div>
+          <div class="col-md-4">
+            <h2>Navigation</h2>
+            <p>Since this is a small web application there is no complex routing and complex state and flow management required. Therefore all navigation in a small web application is done using href direct links.</p>
+            <p><a class="btn btn-secondary" href="http://awi.alaska-software.net:8090/ex/latest/knowledgebase/smallwebapp-template-explained" role="button">View details &raquo;</a></p>
+          </div>
+          <div class="col-md-4">
+            <h2>Ajax w/o javascript</h2>
+            <p>The login form uses ajax to process the login or reject it, this is done using the alaska-software.webui declarative
+            action binding to avoid javascript coding. The logout process is a regular navigation link.</p>
+            <p><a class="btn btn-secondary" href="http://awi.alaska-software.net:8090/ex/latest/knowledgebase/alaska-software-webui-usage" role="button">View details &raquo;</a></p>
+          </div>
+        </div>
+
+        <hr>
+
+

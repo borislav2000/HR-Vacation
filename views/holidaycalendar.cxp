@@ -1,0 +1,51 @@
+
+
+<%
+  ::Session:configPath := SELF:PhysicalPath + "..\application.config"
+  ConnectionManager():startup(::Session:configPath)
+
+   SET DATE FORMAT  'yyyy-mm-dd'
+   dCurrentDate := Date()
+   aEmployees := EmployeeModel():allBy('employee_name')
+   dLastMonthDate := Utilities():getLastMonthDate()
+   cDateErrorMessage := PValue(1)
+%>
+
+<div class="container" id="fragment-container">
+   <h3 class="display-3 mt-3">Holidays Calendar</h3>
+    @IF !(Empty(cDateErrorMessage))
+      <div class="alert alert-danger mt-2" role="alert">
+         @(cDateErrorMessage)
+      </div>
+   @ENDIF
+   <form id="holiday-calendar" method="post">
+      <h3 class=" mt-3">Set Filter Criteria</h3>
+      <div class="inlineinput">
+         <label for="date">From:</label>
+         <input type="date" class="date" name="st_date" width="276" value="@(Transform(dLastMonthDate, "@D"))">
+      </div>
+      <div class="inlineinput">
+         <label for="todate">To:</label>
+         <input type="date" class="todate" name="end_date" width="276" value="@(Transform(dCurrentDate, "@D"))" >
+      </div>
+      <div class="form-group">
+         <label for="empl_list">Employees:</label>
+         <div>
+            <select id="empl_list" name="list" required="required" class="custom-select-sm   ">
+               <option value="0">--All Employees --</option>
+               @FOR n:=1 TO Len(aEmployees)
+               <option value="@(aEmployees[n]:employee_id)" name="empId">@(aEmployees[n]:employee_name)</option>
+               @NEXT
+            </select>
+            <button
+               class="btn btn-outline-info ml-3"
+               data-action="/HolidayController/list"
+               data-target="target"
+               data-parameter="form:holiday-calendar">
+            <i class="fa fa-list"></i> List View
+            </button>
+         </div>
+      </div>
+   </form>
+</div>
+</body>

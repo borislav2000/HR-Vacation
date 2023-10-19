@@ -1,0 +1,58 @@
+<%#page layout="./manager.layout" %>
+
+<%
+   ConnectionManager():startup( SELF:PhysicalPath + "application.config" )
+
+   nEmployeeId := Val(::params:list)
+   dStartDate := StoD(StrTran(::params:st_date, "-"))
+   dEndDate := StoD(StrTran(::params:end_date, "-"))
+   aHolidays := EmployeeHolidayModel():getApprovedHolidays(nEmployeeId, dStartDate, dEndDate)
+   dFormatedStartDate = Transform(dStartDate, "@D")
+   dFormatedEndDate = Transform(dEndDate, "@D")
+
+%>
+
+<div class="container">
+
+   <h3 class="mt-3">List View</h3>
+
+   @::RenderPage("manager-view-buttons-pagelet.cxp", 0)
+
+   <p>Results are shown from date @(dFormatedStartDate) to date @(dFormatedEndDate)</p>
+
+   @IF(nEmployeeId == 0)
+   <p>Employee: All employees</p>
+   @ELSE
+   <p>Employee: @(AccountMgmt():getEmployeeName(nEmployeeId))</p>
+   @ENDIF
+
+   <table class="table table-hover table-striped table-bordered mt-10 w-100" id="examples">
+        <thead>
+            <tr>
+                <th>Employee Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Reason</th>
+            </tr>
+        </thead>
+        <tbody>
+        @FOR n:= 1 TO Len(aHolidays)
+
+            <tr>
+               <td>@(AccountMgmt():getEmployeeName(aHolidays[n]:employee_id))</td>
+               <td data-sort='YYYYMMDD'>@(Transform(aHolidays[n]:start_date, "@D"))</td>
+               <td>@(Transform(aHolidays[n]:end_date, "@D"))</td>
+               <td>@(aHolidays[n]:reason)</td>
+            </tr>
+        @NEXT
+          </tbody>
+        </table>
+       </div>
+
+
+
+@SECTION document_ready_scripts
+ $('#examples').DataTable( {
+    "order": [[1, 'asc']],
+
+    } );

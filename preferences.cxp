@@ -1,0 +1,58 @@
+<%#page layout="./site.layout" %>
+
+<%
+  ConnectionManager():startup( SELF:PhysicalPath + "application.config" )
+
+  oUser := AccountMgmt():getCurrentUser()
+  IF(Empty(oUser))
+      ::HttpResponse:redirect( "/login-form-view.cxp" )
+  ENDIF
+%>
+
+<div class="container">
+
+  <h1 class="display-3">Preferences</h1>
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Current-User: @(oUser:display_name)</h5>
+
+      <h6 class="card-subtitle mb-2 text-muted">Topic-1</h6>
+      <p class="card-text">The brown fox jumps over the quick fox in the first run.</p>
+
+      <a href="https://www.w3schools.com/bootstrap4/bootstrap_cards.asp" class="card-link" target="_new">More about Cards</a>
+    </div>
+
+    <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+</div>
+

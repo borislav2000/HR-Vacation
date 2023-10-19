@@ -1,0 +1,57 @@
+<%#page layout="./site.layout" %>
+
+<%
+  ConnectionManager():startup( SELF:PhysicalPath + "..\application.config"  )
+
+  oUser := UserService():getById(::session:uid)
+  IF(Empty(oUser))
+      ::HttpResponse:redirect( "/views/loginformview.cxp" )
+  ENDIF
+
+  nTotalVacationDays := EmployeeModel():findBy('curr_account_id', ::session:uid):holidays_per_year
+  nUsedVacationDays  := EmployeeHolidayModel():getApprovedVacationDaysById(::session:uid)
+
+  nTotalMedicalVacationDays := EmployeeModel():findBy('curr_account_id', ::session:uid):medical_holidays_per_year
+  nUsedMedicalDays          := EmployeeHolidayModel():getApprovedMedicalDaysById(::session:uid)
+
+  nTotalUnpaidLeaveDays := EmployeeModel():findBy('curr_account_id', ::session:uid):unpaid_leave_days
+  nUsedUnpaidDays       := EmployeeHolidayModel():getApprovedUnpaidDaysById(::session:uid)
+%>
+
+<div class="container">
+
+  <h1 class="display-3">Balance</h1>
+
+  <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Used</th>
+      <th scope="col">Available</th>
+      <th scope="col">Allowance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><i class="mr-1 fa fa-circle" aria-hidden="true" style="color: rgb(136,177,75);"></i>Vacation</th>
+      <td>@(nUsedVacationDays)</td>
+      <td>@(nTotalVacationDays - nUsedVacationDays)</td>
+      <td>@(nTotalVacationDays)</td>
+    </tr>
+    <tr>
+      <th scope="row"><i class="mr-1 fa fa-circle" aria-hidden="true" style="color: rgb(239, 86, 45);"></i>Medical leave</th>
+      <td>@(nUsedMedicalDays)</td>
+      <td>@(nTotalMedicalVacationDays - nUsedMedicalDays)</td>
+      <td>@(nTotalMedicalVacationDays)</td>
+    </tr>
+    <tr>
+      <th scope="row"><i class="mr-1 fa fa-circle" aria-hidden="true" style="color: rgb(209, 175, 148);"></i>Unpaid leave</th>
+      <td>@(nUsedUnpaidDays)</td>
+      <td>@(nTotalUnpaidLeaveDays - nUsedUnpaidDays)</td>
+      <td>@(nTotalUnpaidLeaveDays)</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+

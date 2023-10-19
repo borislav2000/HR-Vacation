@@ -1,0 +1,24 @@
+<%#Page trace="yes"%>
+<%#page layout="./employee.layout" %>
+
+<%
+  ConnectionManager():startup( SELF:PhysicalPath + "application.config" )
+
+  cEMail    := AllTrim(::params:email)
+  cPassword := AllTrim(::params:password)
+  nUserRole := 0
+  cError := AccountMgmt():login( cEMail, cPassword )
+  cRef := ""
+
+   IF !Empty(cError)
+    ::session:errorMessage := cError
+    ::HttpResponse:redirect( "/login-form-view.cxp" )
+   ELSE
+     oEmployee := EmployeeModel():findBy( "email", Lower(cEMail) )
+     nUserRole = oEmployee:employee_role
+     cRef := IIF(nUserRole == 1, "views/bankholidays.cxp", "/manager-view.cxp")
+     ::HttpResponse:redirect( cRef )
+  ENDIF
+
+%>
+

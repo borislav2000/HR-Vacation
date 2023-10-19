@@ -1,0 +1,126 @@
+<%#PAGE trace="yes"%>
+<%
+    ConnectionManager():startup( SELF:PhysicalPath + "application.config" )
+
+    // This forces IE to be out of compatiblity mode (edge=latest release)
+    ::HttpResponse:AddHeader("X-UA-Compatible","IE=edge,chrome=1")
+    lIsLoggedIn := !(Empty(::Session:uid))
+%>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/assets/favicon.ico">
+
+    <title>HR Vacation</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/.assets/bootstrap-4-1-3/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/jumbotron.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/css/login.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/.assets/fontawesome-free-5.5.0-web/css/all.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/.assets/datatables-1-10-18/datatables.min.css"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/input.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="/assets/css/icons.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/views/loginformview.cxp">@(::application:config:info:title)</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+
+
+
+           <a class="nav-link" href="/UserController/redirectToHomeScreen">Home</a>
+
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/views/about.cxp">About</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Help</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="http://doc.alaska-software.com" target="_new">Xbase++</a>
+              <a class="dropdown-item" href="https://www.w3schools.com/bootstrap4/default.asp" target="_new">Bootstrap 4</a>
+              <a class="dropdown-item" href="/views/about.cxp">About</a>
+            </div>
+          </li>
+
+        </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+@IF .NOT. (lisLoggedIn)
+        <li class="nav-item"><a class="nav-link" href="/views/loginformview.cxp"><span class="fas fa-sign-in-alt">&nbsp;</span>Login</a></li>
+
+@ELSE
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" id="navDropDownLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="/assets/images/user-1.png" class="rounded-circle">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navDropDownLink">
+            <a class="dropdown-item" href="/views/preferences.cxp">Profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/views/changepasswordview.cxp">Change Password</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/UserController/logout">Logout</a>
+
+          </div>
+        </li>
+
+
+@ENDIF
+      </ul>
+
+       </div>
+      </div>
+    </nav>
+
+    <main role="main">
+    <div id="app-area" class="container">
+
+
+        @RENDER Body
+
+    </div>
+    </main>
+
+    <footer class="container">
+      <p>&copy; @(::application:config:info:copyright + Str(Year(Date())))</p>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/.assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/.assets/alaska-software/alaska-software.webui.js"></script>
+    <script src="/.assets/popper.js/popper.min.js"></script>
+    <script src="/.assets/bootstrap-4-1-3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/.assets/datatables-1-10-18/datatables.min.js"></script>
+    <script>
+    $(document).ready(function(){
+       webuiInitialize();
+@IF ::hasSection("document_ready_scripts")
+      @RENDER document_ready_scripts
+@ENDIF
+       }
+       );
+    </script>
+
+  </body>
+</html>

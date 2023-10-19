@@ -1,0 +1,65 @@
+<%#page layout="./manager.layout" %>
+
+<div class="container">
+  <h1 class="display-3">Manage Employees</h1>
+
+<%
+  ConnectionManager():startup( SELF:PhysicalPath + "application.config" )
+
+  aEmployees := EmployeeModel():allBy("employee_name")
+  ::RenderPage("manager-view-buttons-pagelet.cxp", 4)
+%>
+
+  <button class="btn btn-outline-primary float-right"
+          data-action="/employee-new-form.cxp">
+          Add Employee
+  </button>
+
+  <div id="loaded-fragment"></div>
+  <table class="table table-hover table-striped table-bordered w-100" id="example" >
+        <thead>
+            <tr >
+                <th>Employee name</th>
+                <th>E-mail</th>
+                <th>Role</th>
+                <th>Holidays per year</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+@FOR n:= 1 TO Len( aEmployees )
+            <tr id="employee_@(aEmployees[n]:employee_id)">
+                <td>@(aEmployees[n]:employee_name)</td>
+                <td>@(aEmployees[n]:email)</td>
+                <td>@(EmployeeModel():getEmployeeRole(aEmployees[n]:employee_role))</td>
+                <td>@(aEmployees[n]:holidays_per_year)</td>
+                <td>
+           <button class="btn btn-outline-secondary btn-sm"
+                   data-action="/employee-edit-form.cxp"
+                   data-parameter="fields:id='@(AllTrim(Str(aEmployees[n]:employee_id)))'">
+                   Edit
+           </button>
+
+           <button class="btn btn-outline-secondary btn-sm"
+                   data-confirm='Confirm deletion of @(aEmployees[n]:employee_name)?'
+                   data-action="./employee-delete-logic.cxp"
+                   data-parameter="fields:id='@(AllTrim(Str(aEmployees[n]:employee_id)))'"
+                   data-target="hidden-container"
+                   data-fragment="loaded-fragment">
+                   Delete
+           </button>
+
+                </td>
+            </tr>
+@NEXT
+        </tbody>
+    </table>
+    <div id="hidden-container"></div>
+</div>
+
+@SECTION document_ready_scripts
+ $('#example').DataTable( {
+    "ordering": false
+    } );
+

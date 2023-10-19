@@ -1,0 +1,43 @@
+<%#page layout="./employee.layout" %>
+
+<div class="container">
+  <h1 class="display-3 mt-3">Request Holidays</h1>
+
+<%
+
+   cError = ""
+
+   IF Empty(::session:errorDateMessage)
+      ::session:Referer := ::HttpRequest:GetVariable("HTTP_REFERER")
+   ELSE
+      cError := ::session:errorDateMessage
+      ::session:errorDateMessage := NIL
+   ENDIF
+
+   ::RenderPage("employee-view-buttons-pagelet.cxp", 2)
+%>
+
+
+  <form class="mb-3" id="request" method="post">
+     <div class="mt-3">
+      @IF !(Empty(cError))
+         <div class="text-danger">@(cError)</div>
+      @ENDIF
+        <label for="startDate">Start Date:</label>
+        <input type="date" name="sDate" id="startDate" width="276" />
+        <br>
+        <label for="endDate">End Date:</label>
+      <input type="date" name="eDate" id="endDate" width="276" />
+      <br>
+      <label for="reason">Reason:</label><br>
+      <textarea name="reason" rows="4" cols="50"></textarea><br>
+      <button type="button"
+      class="btn btn-secondary "
+      data-action=".\employee-request-logic.cxp"
+      data-parameter="form:request">Send request</button>
+    </div>
+    </form>
+
+
+
+</div>

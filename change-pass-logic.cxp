@@ -1,0 +1,22 @@
+<%#Page trace="yes"%>
+
+<%
+   cNewPass := AllTrim(::params:new_password)
+   cRePass := AllTrim(::params:re_password)
+   cPwdError := UserService():changePass(cNewPass, cRePass)
+
+   IF !Empty(cPwdError)
+      ::session:errorMessage := cPwdError
+      ::HttpResponse:redirect( "/change-pass-view.cxp"  )
+   ELSE
+      ::session:Referer := "/logout.cxp"
+   ENDIF
+
+  IF Empty(::Session:Referer)
+    cRef := "/login-form-view.cxp"
+  ELSE
+    cRef := ::Session:Referer
+  ENDIF
+
+  ::HttpResponse:redirect( cRef )
+%>

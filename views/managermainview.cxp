@@ -1,0 +1,11 @@
+<%#page layout="./manager.layout" %>
+
+<%
+   ConnectionManager():startup( SELF:PhysicalPath + "..\application.config" )
+
+   aRequestedHolidays := EmployeeHolidayModel():getRequestedHolidays()
+
+%>
+
+@::RenderPage("/manager-view-buttons-pagelet.cxp")
+@::RenderPage("holidayRequestsMain.cxp", aRequestedHolidays)

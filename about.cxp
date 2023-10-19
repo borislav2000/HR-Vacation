@@ -1,0 +1,18 @@
+<%#page layout="./site.layout" %>
+
+<div class="container">
+
+ <h1 class="display-3">About</h1>
+ <p>Your application description page.</p>
+
+ <blockquote class="blockquote">
+   <p>
+    Xbase++ is functional, object oriented and procedural language with embedded
+    data-access concepts support desktop/microservice/console/web and mobile
+    application development
+   </p>
+   <footer class="blockquote-footer">From Alaska Software's website</footer>
+ </blockquote>
+
+</div>
+

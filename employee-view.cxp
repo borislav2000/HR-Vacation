@@ -1,0 +1,82 @@
+<%#page layout="./employee.layout" %>
+
+<div class="container">
+
+
+<%
+
+   ConnectionManager():startup( SELF:PhysicalPath + "application.config" )
+
+   aEmployeeHolidays := EmployeeHolidayModel():allBy('employee_id')
+   oUser := AccountMgmt():getCurrentUser()
+   IF(oUser == NIL)
+       ::HttpResponse:redirect( "/session-timeout-pagelet.cxp" )
+   ENDIF
+   nCurrentUserId := oUser:account_id
+   cStatus := ""
+   ::RenderPage("employee-view-buttons-pagelet.cxp",1)
+
+%>
+
+  <div id="loaded-fragment"></div>
+  <div id="target-container">
+     <h1 class="display-3 mt-3">My Holidays</h1>
+  <table class="table table-hover table-striped table-bordered w-100" id="example">
+        <thead>
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Requested Days</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+@FOR n:= 1 TO Len( aEmployeeHolidays )
+
+<%
+   DO CASE
+   CASE aEmployeeHolidays[n]:resolution == 0
+      cStatus := "Requested <i class='fa fa-question-circle fa-lg requested-icon'></i>"
+   CASE aEmployeeHolidays[n]:resolution == 1
+      cStatus := "Approved <i class='fa fa-check-circle fa-lg approved-icon'></i>"
+   CASE aEmployeeHolidays[n]:resolution == -1
+      cStatus := "Rejected <i class='fa fa-ban fa-lg rejected-icon'></i>"
+      ENDCASE
+%>
+
+   @ IF(aEmployeeHolidays[n]:employee_id == nCurrentUserId)
+            <tr id="holiday_@(aEmployeeHolidays[n]:employee_holiday_id  )">
+               <td>@(Transform(aEmployeeHolidays[n]:start_date, "@D"))</td>
+               <td>@(Transform(aEmployeeHolidays[n]:end_date, "@D"))</td>
+               <td>@(aEmployeeHolidays[n]:reason)</td>
+               <td>@(cStatus)</td>
+               <td>@(aEmployeeHolidays[n]:used_days)</td>
+               <td>
+               @IF(aEmployeeHolidays[n]:resolution == 0)
+                      <button type="button"
+                  class="btn btn-outline-dark btn-sm"
+                  data-action="/retract-request-logic.cxp"
+                  data-parameter="fields:id='@(AllTrim(Str(aEmployeeHolidays[n]:employee_holiday_id)))'"
+                  data-target="hidden-container"
+                  data-frgament="loaded-fragment"
+                  >Retract</button>
+               @ENDIF
+
+               </td>
+
+            </tr>
+     @ENDIF
+@NEXT
+        </tbody>
+    </table>
+    </div>
+    <div id="hidden-container"></div>
+</div>
+
+@SECTION document_ready_scripts
+ $('#example').DataTable( {
+    "ordering": true
+    } );
+

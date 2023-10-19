@@ -1,0 +1,216 @@
+[PROJECT]
+    VERSION       = 2.3
+    project.xpj
+
+[project.xpj]
+    smallwebapp.web
+    helpers\accountmgmt.dll
+    unit-test\runner.exe
+    helpers\controllers.dll
+
+[smallwebapp.web]
+    COMPILE              = xpp
+    COMPILE_FLAGS        = /q /w
+    DEBUG                = yes
+    GUI                  = no
+    LINKER               = alink
+    LINK_FLAGS           = 
+    RC_COMPILE           = arc
+    RC_FLAGS             = 
+    INTERMEDIATE_DEBUG   = .debug
+    INTERMEDIATE_RELEASE = .release
+    HOSTPROCESS          = views\index.cxp
+    SITE_ROOT            = C:\Users\Borislav\Documents\Xbase++\projects\HR-Vacation-branch
+    SITE_URL             = http://localhost:85/
+    about.cxp
+    application.config
+    approve-request-logic.cxp
+    assets\css\global.css
+    assets\css\icons.css
+    assets\css\login.css
+    assets\images\man-156584_640.png
+    assets\images\unknown.png
+    assets\images\user.png
+    assets\images\user-1.png
+    assets\images\user-2.png
+    calendar-list-view.cxp
+    change-pass-logic.cxp
+    change-pass-view.cxp
+    decline-request-logic.cxp
+    employee.layout
+    employee-add-logic.cxp
+    employee-delete-logic.cxp
+    employee-edit-form.cxp
+    employee-new-form.cxp
+    employee-request-logic.cxp
+    employee-request-view.cxp
+    employee-save-logic.cxp
+    employee-view.cxp
+    employee-view-buttons-pagelet.cxp
+    holiday-calendar-view.cxp
+    index.cxp
+    login-form-logic.cxp
+    login-form-view.cxp
+    logout.cxp
+    manage-employees-view.cxp
+    manager.layout
+    manager-view.cxp
+    manager-view-buttons-pagelet.cxp
+    preferences.cxp
+    retract-request-logic.cxp
+    session-timeout-pagelet.cxp
+    site.layout
+    views\about.cxp
+    views\bankHolidayEditField.cxp
+    views\bankholidays.cxp
+    views\bankHolidaysAdd.cxp
+    views\calendarlistview.cxp
+    views\changepasswordview.cxp
+    views\documents-view.cxp
+    views\employee.layout
+    views\employeeAdd.cxp
+    views\employeeEditFields.cxp
+    views\employeemainview.cxp
+    views\employeerequest.cxp
+    views\employeeview.cxp
+    views\holidaycalendar.cxp
+    views\holidayRequestsMain.cxp
+    views\index.cxp
+    views\loginformview.cxp
+    views\manageemployees.cxp
+    views\manager.layout
+    views\managermainview.cxp
+    views\myHolidaysTable.cxp
+    views\preferences.cxp
+    views\resetpassform.cxp
+    views\site.layout
+
+[helpers\accountmgmt.dll]
+    COMPILE              = xpp
+    COMPILE_FLAGS        = /DLL:DYNAMIC /ga /wi /wl /wu /w
+    DEBUG                = yes
+    GUI                  = no
+    LINKER               = alink
+    LINK_FLAGS           = /dll
+    RC_COMPILE           = arc
+    RC_FLAGS             = 
+    INTERMEDIATE_DEBUG   = .debug
+    INTERMEDIATE_RELEASE = .release
+    WORKINGDIR           = u:\public\cap-public\trunk\templates\smallwebapp
+    RUNPARAMETER         = 5000 index.cxp
+    HOSTPROCESS          = ..\..\..\..\..\..\w32\bin\devwebserver.exe
+    DEPENDS_ON           = $(ASSETS_PATH)\xpp-model-framework
+// $START-AUTODEPEND
+    accountmgmt.def
+    std.ch
+    set.ch
+    natmsg.ch
+    get.ch
+    prompt.ch
+    memvar.ch
+    collat.ch
+    sql.ch
+    dac.ch
+    accountmgmt.obj
+    bank_holiday.obj
+    connection.obj
+    email_sender.obj
+    employee.obj
+    employee_holiday.obj
+    employee_service.obj
+    manager_service.obj
+    user_account.obj
+    user_service.obj
+    utils.obj
+    vacation.obj
+// $STOP-AUTODEPEND
+    accountmgmt.prg
+    bank_holiday.prg
+    connection.prg
+    email_sender.prg
+    employee.prg
+    employee_holiday.prg
+    employee_service.prg
+    manager_service.prg
+    user_account.prg
+    user_service.prg
+    utils.prg
+    vacation.prg
+
+[unit-test\runner.exe]
+    COMPILE              = xpp
+    COMPILE_FLAGS        = /wi /wl /wu /q /w
+    DEBUG                = yes
+    GUI                  = no
+    LINKER               = alink
+    LINK_FLAGS           = 
+    RC_COMPILE           = arc
+    RC_FLAGS             = 
+    INTERMEDIATE_DEBUG   = .debug
+    INTERMEDIATE_RELEASE = .release
+    PRE_BUILD            = copy ..\helpers\*.lib . > nul
+    PRE_BUILD            = copy ..\helpers\*.dll . > nul
+    PRE_BUILD            = copy ..\.assets\xpp-model-framework\*.lib . > nul
+    PRE_BUILD            = copy ..\.assets\xpp-model-framework\*.dll . > nul
+// $START-AUTODEPEND
+    ..\helpers\accountmgmt.lib
+    extern.ch
+    struct.ch
+    ..\.assets\xpp-unit\unit-test.ch
+    get.ch
+    prompt.ch
+    dll.ch
+    collat.ch
+    sql.ch
+    natmsg.ch
+    ..\.assets\xpp-unit\helpers.prg
+    ..\.assets\xpp-unit\listener.prg
+    ..\.assets\xpp-unit\runner.prg
+    ..\.assets\xpp-unit\unit-test.prg
+    class.ch
+    std.ch
+    memvar.ch
+    set.ch
+    controllertestgroup.obj
+    testbankholidaycontroller.obj
+    testemployeecontroller.obj
+    testholidaycontroller.obj
+    test-loader.obj
+    testusercontroller.obj
+    unittestconnectionmanager.obj
+// $STOP-AUTODEPEND
+    controllertestgroup.prg
+    testbankholidaycontroller.prg
+    testemployeecontroller.prg
+    testholidaycontroller.prg
+    test-loader.prg
+    testusercontroller.prg
+    unittestconnectionmanager.prg
+
+[helpers\controllers.dll]
+    COMPILE              = xpp
+    COMPILE_FLAGS        = /wi /wl /wu /q /w /dll:dynamic
+    DEBUG                = yes
+    GUI                  = no
+    LINKER               = alink
+    LINK_FLAGS           = /dll
+    RC_COMPILE           = arc
+    RC_FLAGS             = 
+    INTERMEDIATE_DEBUG   = .debug
+    INTERMEDIATE_RELEASE = .release
+    DEPENDS_ON           = helpers\accountmgmt.dll
+    PRE_BUILD            = copy ..\.assets\xpp-model-framework\*.lib . > nul
+    PRE_BUILD            = copy ..\.assets\xpp-model-framework\*.dll . > nul
+// $START-AUTODEPEND
+    bank_holiday_controller.obj
+    employee_controller.obj
+    holiday_controller.obj
+    main_page_controller.obj
+    user_controller.obj
+// $STOP-AUTODEPEND
+    bank_holiday_controller.prg
+    employee_controller.prg
+    holiday_controller.prg
+    main_page_controller.prg
+    user_controller.prg
+

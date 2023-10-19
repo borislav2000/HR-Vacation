@@ -1,0 +1,26 @@
+<%#page layout="./site.layout" %>
+
+<h1 class="display-3">Help</h1>
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">General Information</h5>
+
+    <!-- we use inline syntax to have different html streamed out depending
+         on a input parameter, see site.layout -> help.cxp href for that.
+         -->
+    @IF ::params:topic == "1"
+      <h6 class="card-subtitle mb-2 text-muted">Topic-1</h6>
+      <p class="card-text">The brown fox jumps over the quick fox in the first run.</p>
+    @ENDIF
+
+    @IF ::params:topic == "2"
+      <h6 class="card-subtitle mb-2 text-muted">Topic-2</h6>
+      <p class="card-text">The quick fox losses dramatically in the second run</p>
+    @ENDIF
+
+    <a href="https://www.w3schools.com/bootstrap4/bootstrap_cards.asp" class="card-link">More about Cards</a>
+  </div>
+</div>
+
+

@@ -1,0 +1,26 @@
+<%#Page trace="no"%>
+<%#page layout="./employee.layout" %>
+
+<%
+   ConnectionManager():startup( SELF:PhysicalPath + "application.config" )
+
+   dStartDate :=  StoD(StrTran(::params:sDate, "-"))
+   dEndDate :=  StoD(StrTran(::params:eDate, "-"))
+   cReason := AllTrim(::params:reason)
+   cDateError := EmployeeService():validateDates(dStartDate, dEndDate)
+   nRequestedDays := EmployeeService():calculateRequestedDays(dStartDate, dEndDate)
+   cRequestedDaysError := EmployeeService():validateRequestedDays(nRequestedDays)
+   ::session:errorDateMessage = ""
+
+   IF !Empty(cDateError) .OR. !Empty(cRequestedDaysError)
+      cInvalidDateError := IIF(!Empty(cDateError), cDateError, "")
+      cInvalidDaysError := IIF(!Empty(cRequestedDaysError), cRequestedDaysError, "")
+      ::session:errorDateMessage := AllTrim(cInvalidDateError + " " + cInvalidDaysError)
+      ::HttpResponse:redirect( "/employee-request-view.cxp" )
+   ELSE
+      EmployeeService():requestHoliday(dStartDate,dEndDate,cReason, nRequestedDays)
+      ::HttpResponse:redirect( "/employee-view.cxp" )
+   ENDIF
+
+  %>
+

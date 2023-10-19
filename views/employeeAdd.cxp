@@ -1,0 +1,60 @@
+<%
+   ConnectionManager():startup( SELF:PhysicalPath + "..\application.config" )
+   cAddErrorMessage := PValue(1)
+%>
+
+<div class="container">
+
+<h1 class="display-4 mt-3">Add new employee</h1>
+
+
+<form id="employeeNewData" method="post">
+   @IF !(Empty(cAddErrorMessage))
+      <div class="text-danger mt-2">
+         @(cAddErrorMessage)
+      </div>
+   @ENDIF
+
+  <div class="form-group">
+    <label for="empl_name">Name</label>
+    <input id="empl_name" name="name" type="text" placeholder="Insert full name here" class="form-control form-control-sm">
+   </div>
+
+  <div class="form-group">
+    <label for="empl_email">eMail</label>
+    <input id="empl_email" name="email" type="text" placeholder="Enter email here" class="form-control form-control-sm">
+  </div>
+
+  <div class="form-group">
+    <label for="empl_pwd">Password</label>
+    <input id="empl_pwd" name="pwd" type="password" placeholder="Enter password here" class="form-control form-control-sm">
+  </div>
+
+  <div class="form-group">
+    <label for="empl_hold">Holidays Per Year</label>
+    <input id="empl_hold" name="holidays" type="number" placeholder="Enter number of holiday days per year here" class="form-control form-control-sm">
+  </div>
+
+  <div class="form-group">
+    <label for="empl_role">Role</label>
+    <div>
+      <select id="empl_role" name="role" class="custom-select-sm">
+        <option value="1">Employee</option>
+        <option value="2">Manager</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+     <button class="btn btn-primary btn-sm"
+     data-action="/EmployeeController/save"
+     data-parameter="form:employeeNewData"
+     data-target="target">Add &amp; Exit</button>&nbsp;
+
+     <button class="btn btn-secondary btn-sm"
+     data-action="/MainPageController/manageEmployees"
+     data-target="target">Cancel</button>
+  </div>
+</form>
+
+</div>

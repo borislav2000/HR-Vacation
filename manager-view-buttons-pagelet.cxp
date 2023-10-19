@@ -1,0 +1,41 @@
+<%#Page trace="no"%>
+
+
+<div class="nav-btns mt-3">
+<button class="btn btn-outline-primary"
+             data-action="/MainPageController/myHolidays"
+             data-target="target"
+             >
+             My Holidays
+   </button>
+   <button class="btn btn-outline-primary"
+          data-action="/MainPageController/holidayRequests"
+          data-target="target">
+          Holiday Requests
+  </button>
+  <button  class="btn btn-outline-primary"
+             data-action="/MainPageController/requestHoliday"
+             data-target="target"
+             >
+             Request Holiday
+   </button>
+  <button class="btn btn-outline-primary"
+          data-action="/MainPageController/bankHolidays"
+          data-target="target">
+          Bank Holidays
+  </button>
+  <button class="btn btn-outline-primary"
+          data-action="/MainPageController/holidayCalendar"
+          data-target="target"
+          data-fragment="fragment-container">
+          Holidays Calendar
+  </button>
+  <button class="btn btn-outline-primary "
+          data-action="/MainPageController/manageEmployees"
+          data-target="target">
+          Manage Employees
+  </button>
+</div>
+
+
+

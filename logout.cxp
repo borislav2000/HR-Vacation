@@ -1,0 +1,10 @@
+<%#Page trace="yes"%>
+<%
+  ConnectionManager():startup( SELF:PhysicalPath + "application.config" )
+  // AH: AccountMgmt does not have a startup method
+  //AccountMgmt():startup( SELF )
+  AccountMgmt():logout()
+  ::HttpResponse:redirect( "/login-form-view.cxp" )
+%>
+
+

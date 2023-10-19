@@ -1,0 +1,25 @@
+<%#PAGE trace="yes"%>
+<%#page layout="./site.layout" %>
+<%
+   ConnectionManager():startup( SELF:PhysicalPath + "application.config" )
+
+   // This forces IE to be out of compatiblity mode (edge=latest release)
+   ::HttpResponse:AddHeader("X-UA-Compatible","IE=edge,chrome=1")
+
+   oUser = UserService():getById(::Session:uid)
+
+   IF(oUser == NIL)
+      ::HttpResponse:redirect( "/session-timeout-pagelet.cxp" )
+   ELSE
+      oEmployee = EmployeeModel():findBy("employee_id", oUser:account_id)
+      IF(oEmployee:employee_role != 1)
+         ::HttpResponse:redirect( "/logout.cxp" )
+      ENDIF
+   ENDIF
+%>
+
+
+
+        @RENDER Body
+
+

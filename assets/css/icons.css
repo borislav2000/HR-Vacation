@@ -1,0 +1,18 @@
+.rejected-icon{
+    color:crimson;
+    float:right;
+}
+
+.requested-icon{
+    color:gold;
+    float:right;
+}
+
+.approved-icon{
+   color:forestgreen;
+   float:right;
+}
+
+.tooltip-icon{
+  float: right;
+}

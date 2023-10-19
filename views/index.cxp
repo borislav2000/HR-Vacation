@@ -1,0 +1,28 @@
+<%#page layout="./site.layout" %>
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <img src="../assets/images/hero-image.png" style="width: 1100px;"></img>
+
+      <div class="container mt-3">
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-md-4">
+            <h2>Balance</h2>
+            <p>HR Vacation offers you a way to track all your holiday days.</p>
+            <p>You can now see your vacation days, medical days and unpaid leave days</p>
+          </div>
+          <div class="col-md-4">
+            <h2>Request</h2>
+            <p>You can request a holiday with just a few clicks</p>
+            <p>Don't loose time on filling documents and wait for approval.</p>
+          </div>
+          <div class="col-md-4">
+            <h2>Many more functionalities</h2>
+            <p>HR comes out of the box with many more functionalities.</p>
+            <p>Just sign in and start managing your vacation days as simple as 1-2-3</p>
+          </div>
+        </div>
+
+        <hr>
+
+

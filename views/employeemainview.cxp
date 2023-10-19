@@ -1,0 +1,11 @@
+<%#page layout="./employee.layout" %>
+<%
+  ConnectionManager():startup( SELF:PhysicalPath + "..\application.config")
+ 
+   aEmployeeHolidays := EmployeeHolidayModel():allBy('employee_id')
+%>
+
+ @::RenderPage("/employee-view-buttons-pagelet.cxp")
+ @::RenderPage("myHolidaysTable.cxp", aEmployeeHolidays, ::Session:uid)
+
+

@@ -1,0 +1,16 @@
+<%#page layout="./site.layout" %>
+
+<div class="container">
+
+ <h1 class="display-3">About</h1>
+
+ <blockquote class="blockquote">
+   <p>
+    HR Vacation is your best choice for vacation tracking and management system.
+    We are new web-platfrom, which helps you request and track your holidays from every place.
+   </p>
+   <footer class="blockquote-footer">From our developers</footer>
+ </blockquote>
+
+</div>
+

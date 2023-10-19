@@ -1,0 +1,38 @@
+<%
+   ConnectionManager():startup( SELF:PhysicalPath + "..\application.config" )
+   oEmployee  := EmployeeModel():findBy("employee_id", PValue(1))
+%>
+
+<form id="employeeDataForm"></form>
+<table>
+   <tr>
+      <td>
+         <input name="nId" type="hidden" value="@(oEmployee:employee_id)" form="employeeDataForm">
+         <input name="name" type="text" value="@(oEmployee:employee_name)" form="employeeDataForm" />
+      </td>
+      <td>
+         <input name="name" type="email" value="@(oEmployee:email)" form="employeeDataForm" />
+      </td>
+      <td>
+         <select value="@(oEmployee:employee_role)" name="role" form="employeeDataForm">
+            <option value="1" @( IIF(oEmployee:employee_role==1,"selected",""))>Employee</option>
+            <option value="2" @( IIF(oEmployee:employee_role==2,"selected",""))>Manager</option>
+         </select>
+      </td>
+      <td>
+         <input name="nHolidays" type="number" value="@(oEmployee:holidays_per_year)" form="employeeDataForm" />
+      </td>
+      <td>
+         <button type="button"
+         class="btn btn-outline-dark btn-sm"
+         data-action="/EmployeeController/update"
+         data-target="target"
+         data-parameter="form:employeeDataForm">Save</button>
+
+         <button type="button"
+         class="btn btn-outline-dark btn-sm"
+         data-action="/MainPageController/manageEmployees"
+         data-target="target">Cancel</button>
+      </td>
+   </tr>
+</table>

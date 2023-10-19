@@ -1,0 +1,68 @@
+
+<%
+   ::Session:configPath := SELF:PhysicalPath + "..\application.config"
+   ConnectionManager():startup( ::Session:configPath )
+  aEmployees := EmployeeModel():allBy("employee_name")
+   cErrorMessage := PValue(1)
+%>
+
+
+  <h1 class="display-3">Manage Employees</h1>
+
+
+  <button class="btn btn-outline-primary float-right"
+          data-action="/EmployeeController/add"
+          data-target="target">
+          Add Employee
+  </button>
+
+
+  <table class="table table-hover table-striped table-bordered w-100" id="employeesTable" >
+        <thead>
+            <tr >
+                <th>Employee name</th>
+                <th>E-mail</th>
+                <th>Role</th>
+                <th>Holidays per year</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+@FOR n:= 1 TO Len( aEmployees )
+            <tr id="employee_@(aEmployees[n]:employee_id)">
+                <td>@(aEmployees[n]:employee_name)</td>
+                <td>@(aEmployees[n]:email)</td>
+                <td>@(EmployeeModel():getEmployeeRole(aEmployees[n]:employee_role))</td>
+                <td>@(aEmployees[n]:holidays_per_year)</td>
+                <td>
+           <button class="btn btn-outline-secondary btn-sm"
+                   data-action="/EmployeeController/edit"
+                   data-target="employee_@(aEmployees[n]:employee_id)"
+                   data-parameter="fields:id='@(AllTrim(Str(aEmployees[n]:employee_id)))'"   >
+                   Edit
+           </button>
+
+           <button class="btn btn-outline-secondary btn-sm"
+                   data-confirm='Confirm deletion of @(aEmployees[n]:employee_name)?'
+                   data-action="/EmployeeController/delete"
+                   data-parameter="fields:id='@(AllTrim(Str(aEmployees[n]:employee_id)))'"
+                   data-target="employeesTable"
+                   data-fragment="employeesTable">
+                   Delete
+           </button>
+
+                </td>
+            </tr>
+@NEXT
+        </tbody>
+    </table>
+    </div>
+    <div id="hidden-container"></div>
+
+
+@SECTION document_ready_scripts
+ $('#example').DataTable( {
+    "ordering": false
+    } );
+

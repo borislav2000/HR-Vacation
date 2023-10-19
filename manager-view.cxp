@@ -1,0 +1,64 @@
+<%#page layout="./manager.layout" %>
+
+
+
+<%
+   ConnectionManager():startup( SELF:PhysicalPath + "application.config" )
+
+   aUserHolidays := EmployeeHolidayModel():allBy('employee_id')
+
+   aEmployees := EmployeeModel():allBy('employee_id')
+
+   nUserId := 0
+%>
+
+    @::RenderPage("manager-view-buttons-pagelet.cxp",1)
+
+<div id="loaded-fragment"></div>
+<div id="target">
+   <div class="container">
+      <h3 class="display-3 mt-3">Holiday Requests</h3>
+      <table class="table table-hover table-striped table-bordered w-100 mt-3" id="examples">
+         <thead>
+            <tr>
+               <th>Employee</th>
+               <th>Start Date</th>
+               <th>End Date</th>
+               <th>Reason</th>
+               <th>Action</th>
+            </tr>
+         </thead>
+         <tbody>
+            <%
+               FOR n:= 1 TO Len( aUserHolidays )
+                  IF(aUserHolidays[n]:resolution == 0)
+                     nUserId := aUserHolidays[n]:employee_id
+            %>
+            <tr id="request_@(aUserHolidays[n]:employee_holiday_id)">
+               <td>@(aEmployees[nUserId]:employee_name)</td>
+               <td>@(Transform(aUserHolidays[n]:start_date, "@D"))</td>
+               <td>@(Transform(aUserHolidays[n]:end_date, "@D"))</td>
+               <td>@(aUserHolidays[n]:reason)</td>
+               <td>
+                  <button type="button"
+                     class="btn btn-outline-success btn-sm"
+                     data-action="/approve-request-logic.cxp"
+                     data-parameter="fields:id='@(AllTrim(Str(aUserHolidays[n]:employee_holiday_id)))'"
+                     data-target="hidden-container"
+                     data-fragment="loaded-fragment">Approve</button>
+                  <button type="button"
+                     class="btn btn-outline-danger btn-sm ml-2"
+                     data-action="/decline-request-logic.cxp"
+                     data-parameter="fields:id='@(AllTrim(Str(aUserHolidays[n]:employee_holiday_id)))'"
+                     data-target="hidden-container"
+                     data-fragment="loaded-fragment">Decline</button>
+               </td>
+            </tr>
+               @ENDIF
+            @NEXT
+         </tbody>
+      </table>
+   </div>
+   <div id="hidden-container"></div>
+   </form>
+</div>

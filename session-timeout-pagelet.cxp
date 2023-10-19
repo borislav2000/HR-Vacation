@@ -1,0 +1,16 @@
+<%#page layout="./site.layout" %>
+<%#Page trace="no"%>
+
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+</head>
+
+<body>
+   <div class="alert alert-danger mt-2" role="alert">
+      Your sesion has expired! Please login again to continue!
+   </div>
+</body>
+
+</html>
+

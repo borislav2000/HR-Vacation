@@ -1,0 +1,73 @@
+<%
+
+      aEmployeeHolidays := PValue(1)
+      cStatus := ""
+      sessionId := PValue(2)
+%>
+
+ <div id="table">
+  <h1 class="display-3 mt-3">My holidays</h1>
+  <table class="table table-hover table-striped table-bordered w-100" id="employeeRequests">
+        <thead>
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Requested Days</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+@FOR n:= 1 TO Len( aEmployeeHolidays )
+
+<%
+   DO CASE
+   CASE aEmployeeHolidays[n]:resolution == 0
+      cStatus := "Requested <i class='fa fa-question-circle fa-lg requested-icon'></i>"
+   CASE aEmployeeHolidays[n]:resolution == 1
+      cStatus := "Approved <i class='fa fa-check-circle fa-lg approved-icon'></i>"
+   CASE aEmployeeHolidays[n]:resolution == -1
+      cStatus := "Rejected <i class='fa fa-ban fa-lg rejected-icon'></i>"
+      ENDCASE
+%>
+
+
+           @IF (aEmployeeHolidays[n]:employee_id == sessionId)
+            <tr id="holiday_@(aEmployeeHolidays[n]:employee_holiday_id  )">
+               <td>@(Transform(aEmployeeHolidays[n]:start_date, "@D"))</td>
+               <td>@(Transform(aEmployeeHolidays[n]:end_date, "@D"))</td>
+               <td>@(Utilities():getVacationName(aEmployeeHolidays[n]:vacation_type))
+                  <i class="fa fa-info"
+                  style="float: right; color: royalblue"
+                  data-toggle="tooltip"
+                  title="@(aEmployeeHolidays[n]:reason)"></i>
+               </td>
+               <td>@(cStatus)</td>
+               <td>@(aEmployeeHolidays[n]:used_days)</td>
+               <td>
+               @IF(aEmployeeHolidays[n]:resolution == 0)
+                      <button type="button"
+                  class="btn btn-outline-dark btn-sm"
+                  data-action="/HolidayController/retract"
+                  data-parameter="fields:id='@(AllTrim(Str(aEmployeeHolidays[n]:employee_holiday_id)))'"
+                  data-target="table"
+
+                  >Retract</button>
+               @ENDIF
+
+               </td>
+
+            </tr>
+            @ENDIF
+@NEXT
+        </tbody>
+    </table>
+    </div>
+    <div id="hidden-container"></div>
+
+
+@SECTION document_ready_scripts
+ $('#employeeRequests').DataTable( {
+    "ordering": true
+    } );
